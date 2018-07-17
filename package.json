@@ -1,0 +1,20 @@
+{
+  "name": "koa-apis",
+  "version": "1.0.0",
+  "description": "apis based on koa",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/wisnuwicak/koa-apis.git"
+  },
+  "keywords": [
+    "koa",
+    "apis"
+  ],
+  "author": "wwicaksono",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/wisnuwicak/koa-apis#readme"
+}
