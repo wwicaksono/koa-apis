@@ -4,6 +4,7 @@
   "description": "apis based on koa",
   "main": "index.js",
   "scripts": {
+    "start": "nodejs ./server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +17,8 @@
   ],
   "author": "wwicaksono",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/wisnuwicak/koa-apis#readme"
+  "homepage": "https://bitbucket.org/wisnuwicak/koa-apis#readme",
+  "dependencies": {
+    "koa": "^2.5.2"
+  }
 }
