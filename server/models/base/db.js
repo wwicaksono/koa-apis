@@ -12,7 +12,11 @@ const pg = pgp({
   connect(client) {
     const cp = client.connectionParameters;
     console.log('Connected to database:', cp.database);
-  }
+  },
+  disconnect(client) {
+    const cp = client.connectionParameters;
+    console.log('Disconnecting from database:', cp.database);
+  },
 })(config);
 
 export default pg;
