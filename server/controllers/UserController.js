@@ -4,11 +4,17 @@ import UserFacade from '../facade/UserFacade';
 
 class UserController {
   static async get(ctx) {
-    const data = await UserModel.get(ctx.params.id);
-    if (data) {
-      ctx.body = data;
+    let data;
+    if (ctx.params.id) {
+      data = await UserModel.getOne(ctx.params.id);
     } else {
-      ctx.body = 'error';
+      data = await UserModel.getAll();
+    }
+
+    if (data) {
+      ctx.response.ok(data);
+    } else {
+      ctx.response.notFound(JSON.stringify('user not found'));
     }
   }
 

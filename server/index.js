@@ -2,6 +2,7 @@ import 'dotenv/config';
 import Koa from 'koa';
 import logger from 'koa-pino-logger';
 import bodyParser from 'koa-bodyparser';
+import responseHandler from 'koa-response-handler';
 import router from './router';
 
 const app = new Koa();
@@ -13,6 +14,7 @@ app.use(logger({
   level: 'debug',
 }));
 
+app.use(responseHandler({ contentType: 'application/json' }));
 app.use(bodyParser());
 app.use(router.routes());
 app.use(router.allowedMethods());
