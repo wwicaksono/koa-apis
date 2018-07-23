@@ -1,4 +1,6 @@
 import 'dotenv/config';
+import 'babel-core/register';
+import 'babel-polyfill';
 import Koa from 'koa';
 import logger from 'koa-pino-logger';
 import bodyParser from 'koa-bodyparser';
