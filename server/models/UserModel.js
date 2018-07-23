@@ -2,9 +2,18 @@ import pg from './base/db';
 import builder from '../library/builder';
 
 class UserModel {
-  static async getOne(id) {
+  static async getOneById(id) {
     try {
       const result = await pg.oneOrNone('select * from users where id = $1', [id]);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async getOneByUsername(username) {
+    try {
+      const result = await pg.oneOrNone('select * from users where username = $1', [username]);
       return result;
     } catch (error) {
       throw error;

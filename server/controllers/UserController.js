@@ -6,7 +6,7 @@ class UserController {
   static async get(ctx) {
     let data;
     if (ctx.params.id) {
-      data = await UserModel.getOne(ctx.params.id);
+      data = await UserModel.getOneById(ctx.params.id);
     } else {
       data = await UserModel.getAll();
     }
@@ -20,7 +20,8 @@ class UserController {
 
   static async add(ctx) {
     const reqBody = ctx.request.body;
-    const addValidation = UserFacade.add(reqBody);
+    const addValidation = await UserFacade.add(reqBody);
+    console.log(addValidation);
     if (addValidation === true) {
       const hashedPassword = await bcrypt.hash(reqBody.password, 5);
       const user = {
