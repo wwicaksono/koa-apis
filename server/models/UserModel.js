@@ -4,7 +4,7 @@ import builder from '../library/builder';
 class UserModel {
   static async getOneById(id) {
     try {
-      const result = await pg.oneOrNone('select * from users where id = $1', [id]);
+      const result = await pg.oneOrNone('select * from users where bookid = $1', [id]);
       return result;
     } catch (error) {
       throw error;
@@ -22,7 +22,7 @@ class UserModel {
 
   static async getAll() {
     try {
-      return await pg.any('select * from users');
+      return await pg.any('select * from users order by username');
     } catch (error) {
       throw error;
     }
