@@ -6,7 +6,7 @@ const router = new Router();
 router
   .get('/user/all', UserController.get)
   .get('/user/:id', UserController.get)
-  .post('/', UserController.add);
+  .post('/user', UserController.add);
 
 router.prefix('/v1');
 
