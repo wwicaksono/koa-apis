@@ -1,5 +1,5 @@
 import pg from './base/db';
-import builder from '../library/builder';
+import Builder from '../library/Builder';
 
 class UserModel {
   static async getOneById(id) {
@@ -29,7 +29,7 @@ class UserModel {
   }
 
   static async add(user) {
-    const timeStamp = builder.toPostgresTimestamp();
+    const timeStamp = Builder.toPostgresTimestamp();
     try {
       await pg.none('insert into users(username, password, created_at, updated_at) values($1, $2, $3, $4)', [user.username, user.password, timeStamp, timeStamp]);
       return true;

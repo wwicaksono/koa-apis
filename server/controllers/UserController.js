@@ -21,7 +21,6 @@ class UserController {
   static async add(ctx) {
     const reqBody = ctx.request.body;
     const addValidation = await UserFacade.add(reqBody);
-    console.log(addValidation);
     if (addValidation === true) {
       const hashedPassword = await bcrypt.hash(reqBody.password, 5);
       const user = {
