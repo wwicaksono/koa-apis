@@ -2,21 +2,16 @@ import 'dotenv/config';
 import 'babel-core/register';
 import 'babel-polyfill';
 import Koa from 'koa';
-import pinoLogger from 'koa-pino-logger';
 import bodyParser from 'koa-bodyparser';
 import responseHandler from 'koa-response-handler';
+import pinoLogger from './library/logger';
 import router from './router';
 
 const app = new Koa();
-const logger = pinoLogger({
-  // prettyPrint: true,
-  // extreme: true,
-  level: 'debug',
-});
 const port = process.env.PORT || 3000;
 // app.silent = true;
 
-app.use(logger);
+app.use(pinoLogger);
 
 app.use(responseHandler({ contentType: 'application/json' }));
 app.use(bodyParser());

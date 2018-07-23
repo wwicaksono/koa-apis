@@ -1,1 +1,6 @@
-module.exports = { "extends": "airbnb-base" };
+module.exports = {
+  "rules": {
+    "no-console": 0
+  },
+  "extends": "airbnb-base",
+};
