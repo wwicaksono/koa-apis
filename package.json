@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon ./server --exec babel-node nodejs ",
-    "build": "rm -r ./server-dist/* && babel server -d server-dist --source-maps",
+    "build": "find ./server-dist/* -not -name '.gitkeep' -print0 | xargs -0 rm -rf && babel server -d server-dist --source-maps",
     "serve": "node ./server-dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
