@@ -30,12 +30,13 @@ class UserController {
       const insertResult = await UserModel.add(user);
 
       if (insertResult) {
-        ctx.body = 'inserted';
-        return;
+        ctx.response.ok(JSON.stringify('success'));
+      } else {
+        ctx.response.badRequest(JSON.stringify('failed'));
       }
-      ctx.body = 'failed';
+    } else {
+      ctx.response.badRequest(JSON.stringify(addValidation));
     }
-    ctx.body = addValidation;
   }
 }
 
