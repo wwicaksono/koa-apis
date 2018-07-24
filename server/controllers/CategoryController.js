@@ -4,17 +4,17 @@ import CategoryFacade from '../facade/CategoryFacade';
 
 class CategoryController {
   static async get(ctx) {
-    let bookData;
+    let categoryData;
     if (ctx.params.id) {
-      bookData = await CategoryModel.getOneById(ctx.params.id);
+      categoryData = await CategoryModel.getOneById(ctx.params.id);
     } else {
-      bookData = await CategoryModel.getAll();
+      categoryData = await CategoryModel.getAll();
     }
 
-    if (!_.isEmpty(bookData)) {
-      ctx.response.ok(bookData);
+    if (!_.isEmpty(categoryData)) {
+      ctx.response.ok(categoryData);
     } else {
-      ctx.response.notFound(JSON.stringify('books not found'));
+      ctx.response.notFound(JSON.stringify('category not found'));
     }
   }
 
@@ -22,11 +22,11 @@ class CategoryController {
     const reqBody = ctx.request.body;
     const addValidation = await CategoryFacade.add(reqBody);
     if (addValidation === true) {
-      const book = {
+      const category = {
         name: reqBody.name,
-        description: reqBody.description,
+        parentcategoryid: reqBody.parentcategoryid,
       };
-      const insertResult = await CategoryModel.add(book);
+      const insertResult = await CategoryModel.add(category);
 
       if (insertResult) {
         ctx.response.ok(JSON.stringify('success'));
@@ -45,8 +45,7 @@ class CategoryController {
       const book = {
         id: ctx.params.id,
         name: reqBody.name,
-        qty: reqBody.qty,
-        description: reqBody.description,
+        parentCategoryId: reqBody.parentCategoryId,
       };
       const updateResult = await CategoryModel.update(book);
 

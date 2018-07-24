@@ -42,7 +42,7 @@ class CategoryModel {
     const timeStamp = Builder.toPostgresTimestamp();
     try {
       await pg.none('update category set name = $1, parentcategoryid = $2, updated_at = $3 where categoryid = $4;',
-        [category.name, category.parentcategoryid, timeStamp, category.id]);
+        [category.name, category.parentCategoryId, timeStamp, category.id]);
       return true;
     } catch (error) {
       throw error;

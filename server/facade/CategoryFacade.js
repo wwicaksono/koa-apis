@@ -1,26 +1,27 @@
 import _ from 'lodash';
-import BookModel from '../models/BookModel';
+import CategoryModel from '../models/CategoryModel';
 
-class BookFacade {
-  static async add(book) {
-    if (_.isEmpty(book)) return 'No input specified';
-    if (_.isEmpty(book.name)) return 'Please input book name';
+class CategoryFacade {
+  static async add(category) {
+    if (_.isEmpty(category)) return 'No input specified';
+    if (_.isEmpty(category.name)) return 'Please input category name';
 
-    const bookData = await BookModel.getOneByBookname(book.name);
-    if (!_.isEmpty(bookData)) return 'Book name already exists';
+    const categoryData = await CategoryModel.getOneByCategoryname(category.name);
+    if (!_.isEmpty(categoryData)) return 'Category name already exists';
 
     return true;
   }
 
-  static async update(id, book) {
-    if (_.isEmpty(book)) return 'No input specified';
-    if (_.isEmpty(id)) return 'No bookid specified';
+  static async update(id, category) {
+    if (_.isEmpty(category)) return 'No input specified';
+    if (_.isEmpty(id)) return 'No categoryid specified';
+    if (_.isEmpty(category.name)) return 'Please input category name';
 
-    const bookData = await BookModel.getOneById(id);
-    if (_.isEmpty(bookData)) return 'Bookid is not exists';
+    const categoryData = await CategoryModel.getOneById(id);
+    if (_.isEmpty(categoryData)) return 'Categoryid is not exists';
 
     return true;
   }
 }
 
-export default BookFacade;
+export default CategoryFacade;
