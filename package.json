@@ -4,9 +4,11 @@
   "description": "apis based on koa",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./server --exec babel-node nodejs ",
-    "build": "find server-dist/* -not -name '.gitkeep' -print0 | xargs -0 rm -rf && babel server -d server-dist --source-maps",
-    "serve": "node ./server-dist/index.js",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "nodemon ./server --ignore ./client --ignore ./server-dist --exec babel-node nodejs ",
+    "client": "cd client && npm start",
+    "server-build": "find server-dist/* -not -name '.gitkeep' -print0 | xargs -0 rm -rf && babel server -d server-dist --source-maps",
+    "server-serve": "node ./server-dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "engines": {
@@ -43,7 +45,8 @@
     "pg-promise": "^8.4.5"
   },
   "devDependencies": {
-    "eslint": "^5.1.0",
+    "concurrently": "^3.6.0",
+    "eslint": "^5.2.0",
     "eslint-config-airbnb-base": "^13.0.0",
     "eslint-plugin-import": "^2.13.0"
   }
