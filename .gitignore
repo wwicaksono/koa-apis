@@ -1,9 +1,10 @@
 node_modules/
-server-dist/
-!server-dist/.gitkeep
-.env
+# server-dist/
+# !server-dist/.gitkeep
+# !/client-dist/.gitkeep
+# /client-dist/**
 client/node_modules/
-client/build
+.env
 *.DS_Store
 *.env.local
 *.env.development.local
