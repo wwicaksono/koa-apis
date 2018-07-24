@@ -1,5 +1,15 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+
+const pathsToClean = [
+  'client-dist',
+];
+
+const cleanOptions = {
+  exclude: ['.gitkeep'],
+  verbose: true,
+};
 
 module.exports = {
   context: __dirname,
@@ -25,6 +35,10 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
+          options: {
+            babelrc: false,
+            presets: ['env', 'react'],
+          },
         },
       },
       {
@@ -34,6 +48,7 @@ module.exports = {
     ],
   },
   plugins: [
+    new CleanWebpackPlugin(pathsToClean, cleanOptions),
     new HtmlWebpackPlugin({
       title: 'Development',
       inject: true,
