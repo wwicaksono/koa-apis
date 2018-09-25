@@ -4,21 +4,24 @@ import BookController from './controllers/BookController';
 import CategoryController from './controllers/CategoryController';
 
 const router = new Router();
+const userController = new UserController();
+const bookController = new BookController();
+const categoryController = new CategoryController();
 
 router
-  .get('/user/all', UserController.get)
-  .get('/user/:id', UserController.get)
-  .post('/user', UserController.add);
+  .get('/user/all', userController.get.bind(userController))
+  .get('/user/:id', userController.get.bind(userController))
+  .post('/user', userController.add.bind(userController));
 
 router
-  .get('/book/all', BookController.get)
-  .post('/book/:id', BookController.update)
-  .post('/book', BookController.add);
+  .get('/book/all', bookController.get.bind(bookController))
+  .post('/book/:id', bookController.update.bind(bookController))
+  .post('/book', bookController.add.bind(bookController));
 
 router
-  .get('/category/all', CategoryController.get)
-  .post('/category/:id', CategoryController.update)
-  .post('/category', CategoryController.add);
+  .get('/category/all', categoryController.get.bind(categoryController))
+  .post('/category/:id', categoryController.update.bind(categoryController))
+  .post('/category', categoryController.add.bind(categoryController));
 
 router.prefix('/v1');
 

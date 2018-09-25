@@ -3,12 +3,17 @@ import UserModel from '../models/UserModel';
 import UserFacade from '../facade/UserFacade';
 
 class UserController {
-  static async get(ctx) {
+  constructor() {
+    this.userModel = new UserModel();
+    this.userFacade = new UserFacade();
+  }
+
+  async get(ctx) {
     let data;
     if (ctx.params.id) {
-      data = await UserModel.getOneById(ctx.params.id);
+      data = await this.userModel.getOneById(ctx.params.id);
     } else {
-      data = await UserModel.getAll();
+      data = await this.userModel.getAll();
     }
 
     if (data) {
@@ -18,16 +23,16 @@ class UserController {
     }
   }
 
-  static async add(ctx) {
+  async add(ctx) {
     const reqBody = ctx.request.body;
-    const addValidation = await UserFacade.add(reqBody);
+    const addValidation = await this.userFacade.add(reqBody);
     if (addValidation === true) {
       const hashedPassword = await bcrypt.hash(reqBody.password, 5);
       const user = {
         username: reqBody.username,
         password: hashedPassword,
       };
-      const insertResult = await UserModel.add(user);
+      const insertResult = await this.userModel.add(user);
 
       if (insertResult) {
         ctx.response.ok(JSON.stringify('success'));

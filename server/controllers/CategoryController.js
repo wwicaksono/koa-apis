@@ -3,12 +3,17 @@ import CategoryModel from '../models/CategoryModel';
 import CategoryFacade from '../facade/CategoryFacade';
 
 class CategoryController {
-  static async get(ctx) {
+  constructor() {
+    this.categoryModel = new CategoryModel();
+    this.categoryFacade = new CategoryFacade();
+  }
+
+  async get(ctx) {
     let categoryData;
     if (ctx.params.id) {
-      categoryData = await CategoryModel.getOneById(ctx.params.id);
+      categoryData = await this.categoryModel.getOneById(ctx.params.id);
     } else {
-      categoryData = await CategoryModel.getAll();
+      categoryData = await this.categoryModel.getAll();
     }
 
     if (!_.isEmpty(categoryData)) {
@@ -18,15 +23,15 @@ class CategoryController {
     }
   }
 
-  static async add(ctx) {
+  async add(ctx) {
     const reqBody = ctx.request.body;
-    const addValidation = await CategoryFacade.add(reqBody);
+    const addValidation = await this.categoryFacade.add(reqBody);
     if (addValidation === true) {
       const category = {
         name: reqBody.name,
         parentcategoryid: reqBody.parentcategoryid,
       };
-      const insertResult = await CategoryModel.add(category);
+      const insertResult = await this.categoryModel.add(category);
 
       if (insertResult) {
         ctx.response.ok(JSON.stringify('success'));
@@ -38,16 +43,16 @@ class CategoryController {
     }
   }
 
-  static async update(ctx) {
+  async update(ctx) {
     const reqBody = ctx.request.body;
-    const addValidation = await CategoryFacade.update(ctx.params.id, reqBody);
+    const addValidation = await this.categoryFacade.update(ctx.params.id, reqBody);
     if (addValidation === true) {
       const book = {
         id: ctx.params.id,
         name: reqBody.name,
         parentCategoryId: reqBody.parentCategoryId,
       };
-      const updateResult = await CategoryModel.update(book);
+      const updateResult = await this.categoryModel.update(book);
 
       if (updateResult) {
         ctx.response.ok(JSON.stringify('success'));

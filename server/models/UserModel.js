@@ -1,37 +1,36 @@
-import pg from './base/db';
-import Builder from '../library/Builder';
+import BaseModel from './base/BaseModel';
 
-class UserModel {
-  static async getOneById(id) {
+class UserModel extends BaseModel {
+  async getOneById(id) {
     try {
-      const result = await pg.oneOrNone('select * from users where bookid = $1', [id]);
+      const result = await this.db.oneOrNone('select * from users where bookid = $1', [id]);
       return result;
     } catch (error) {
       throw error;
     }
   }
 
-  static async getOneByUsername(username) {
+  async getOneByUsername(username) {
     try {
-      const result = await pg.oneOrNone('select * from users where username = $1', [username]);
+      const result = await this.db.oneOrNone('select * from users where username = $1', [username]);
       return result;
     } catch (error) {
       throw error;
     }
   }
 
-  static async getAll() {
+  async getAll() {
     try {
-      return await pg.any('select * from users order by username');
+      return await this.db.any('select * from users order by username');
     } catch (error) {
       throw error;
     }
   }
 
-  static async add(user) {
-    const timeStamp = Builder.toPostgresTimestamp();
+  async add(user) {
+    const timeStamp = this.builder.toPostgresTimestamp();
     try {
-      await pg.none('insert into users(username, password, created_at, updated_at) values($1, $2, $3, $4)', [user.username, user.password, timeStamp, timeStamp]);
+      await this.db.none('insert into users(username, password, created_at, updated_at) values($1, $2, $3, $4)', [user.username, user.password, timeStamp, timeStamp]);
       return true;
     } catch (error) {
       throw error;

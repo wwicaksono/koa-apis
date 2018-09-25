@@ -3,12 +3,17 @@ import BookModel from '../models/BookModel';
 import BookFacade from '../facade/BookFacade';
 
 class BookController {
-  static async get(ctx) {
+  constructor() {
+    this.bookModel = new BookModel();
+    this.bookFacade = new BookFacade();
+  }
+
+  async get(ctx) {
     let bookData;
     if (ctx.params.id) {
-      bookData = await BookModel.getOneById(ctx.params.id);
+      bookData = await this.bookModel.getOneById(ctx.params.id);
     } else {
-      bookData = await BookModel.getAll();
+      bookData = await this.bookModel.getAll();
     }
 
     if (!_.isEmpty(bookData)) {
@@ -18,15 +23,15 @@ class BookController {
     }
   }
 
-  static async add(ctx) {
+  async add(ctx) {
     const reqBody = ctx.request.body;
-    const addValidation = await BookFacade.add(reqBody);
+    const addValidation = await this.bookFacade.add(reqBody);
     if (addValidation === true) {
       const book = {
         name: reqBody.name,
         description: reqBody.description,
       };
-      const insertResult = await BookModel.add(book);
+      const insertResult = await this.bookModel.add(book);
 
       if (insertResult) {
         ctx.response.ok(JSON.stringify('success'));
@@ -38,9 +43,9 @@ class BookController {
     }
   }
 
-  static async update(ctx) {
+  async update(ctx) {
     const reqBody = ctx.request.body;
-    const addValidation = await BookFacade.update(ctx.params.id, reqBody);
+    const addValidation = await this.bookFacade.update(ctx.params.id, reqBody);
     if (addValidation === true) {
       const book = {
         id: ctx.params.id,
@@ -48,7 +53,7 @@ class BookController {
         qty: reqBody.qty,
         description: reqBody.description,
       };
-      const updateResult = await BookModel.update(book);
+      const updateResult = await this.bookModel.update(book);
 
       if (updateResult) {
         ctx.response.ok(JSON.stringify('success'));
