@@ -1,6 +1,4 @@
 import 'dotenv/config';
-import 'babel-core/register';
-import 'babel-polyfill';
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import responseHandler from 'koa-response-handler';
