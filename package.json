@@ -22,31 +22,30 @@
     "apis"
   ],
   "proxy": "http://localhost:3000",
-  "author": "Wisnu W <wisnu.wicaksono@detik.com>",
+  "author": "Wisnu W <wisnuwicak2@gmail.com>",
   "license": "ISC",
   "homepage": "https://github.com/wwicaksono/koa-apis#readme",
   "dependencies": {
-    "bcrypt": "^3.0.6",
-    "dotenv": "^8.0.0",
-    "koa": "^2.7.0",
-    "koa-bodyparser": "^4.2.1",
-    "koa-pino-logger": "^2.1.3",
-    "koa-response-handler": "^2.1.0",
-    "koa-router": "^7.4.0",
-    "lodash": "^4.17.11",
-    "moment": "^2.24.0",
-    "pg-promise": "^8.7.2"
+    "bcrypt": "^4.0.1",
+    "dotenv": "^8.2.0",
+    "koa": "^2.11.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa-pino-logger": "^3.0.0",
+    "koa-router": "^8.0.8",
+    "lodash": "^4.17.15",
+    "moment": "^2.25.1",
+    "pg-promise": "^10.5.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.4.4",
-    "@babel/core": "^7.4.5",
-    "@babel/node": "^7.4.5",
-    "@babel/preset-env": "^7.4.5",
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.9.6",
     "@babel/register": "^7.4.4",
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.17.3",
-    "html-webpack-plugin": "^3.2.0",
-    "nodemon": "^1.19.1"
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "html-webpack-plugin": "^4.3.0",
+    "nodemon": "^2.0.3"
   }
 }

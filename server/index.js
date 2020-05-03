@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
-import responseHandler from 'koa-response-handler';
+import responseHandler from './library/responseHandler';
 import pinoLogger from './library/logger';
 import router from './router';
 
@@ -11,7 +11,7 @@ const port = process.env.PORT || 3000;
 
 app.use(pinoLogger);
 
-app.use(responseHandler({ contentType: 'application/json' }));
+app.use(responseHandler());
 app.use(bodyParser());
 app.use(router.routes());
 app.use(router.allowedMethods());
