@@ -33,7 +33,7 @@
     "koa-pino-logger": "^3.0.0",
     "koa-router": "^8.0.8",
     "lodash": "^4.17.15",
-    "moment": "^2.25.1",
+    "moment": "^2.29.4",
     "pg-promise": "^10.5.2"
   },
   "devDependencies": {
